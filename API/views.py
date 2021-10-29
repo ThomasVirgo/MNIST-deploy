@@ -19,7 +19,9 @@ class RequestPrediction(APIView):
     def post(self, request, form=None):
         try:
             data = request.data
+            print(data)
             numpy_array = np.array(data)
+            numpy_array = numpy_array/255
             input = numpy_array.reshape((1, numpy_array.shape[0], numpy_array.shape[0]))
             model = settings.ML_MODEL
             prediction = np.argmax(model.predict(input))
